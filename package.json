@@ -1,0 +1,20 @@
+{
+    "name": "your-alexa-lists-bot",
+    "version": "1.0.0",
+    "description": "Telegram bot to access Alexa's lists",
+    "main": "src/index.ts",
+    "author": "Leonardo Petta do Nascimento",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "start:dev": "nodemon"
+    },
+    "dependencies": {
+        "telegram-node-bot": "^4.0.5"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.2.2"
+    }
+}
