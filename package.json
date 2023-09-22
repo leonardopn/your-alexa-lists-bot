@@ -10,9 +10,10 @@
         "start:dev": "nodemon"
     },
     "dependencies": {
-        "telegram-node-bot": "^4.0.5"
+        "node-telegram-bot-api": "^0.63.0"
     },
     "devDependencies": {
+        "@types/node-telegram-bot-api": "^0.61.7",
         "nodemon": "^3.0.1",
         "ts-node": "^10.9.1",
         "typescript": "^5.2.2"
