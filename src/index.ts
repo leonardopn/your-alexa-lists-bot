@@ -1,5 +1,4 @@
 import "dotenv/config";
+import { startBot } from "./service/TelegramBot";
 
-console.log(process.env.d);
-
-console.log("Hello world");
+startBot();
