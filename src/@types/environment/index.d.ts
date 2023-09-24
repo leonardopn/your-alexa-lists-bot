@@ -5,6 +5,7 @@ export type DefaultEnvs = {
     ALEXA_REDIRECT_URI: string;
     ALEXA_OAUTH_URL: string;
     ALEXA_CLIENT_SECRET: string;
+    ALEXA_SKILL_ID: string;
 };
 
 declare global {
