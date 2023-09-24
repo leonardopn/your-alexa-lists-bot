@@ -28,3 +28,31 @@ export async function getAmazonAccessToken(code: string) {
         throw error;
     }
 }
+
+export async function enableToUseSkill(accessToken: string, code: string) {
+    try {
+        const { data } = await axios.post(
+            `https://api.amazonalexa.com/v1/users/~current/skills/${process.env.ALEXA_SKILL_ID}/enablement`,
+            {
+                stage: "development",
+                accountLinkRequest: {
+                    redirectUri: process.env.ALEXA_REDIRECT_URI,
+                    authCode: code,
+                    type: "AUTH_CODE",
+                },
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+
+        return data;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            throw new Error(JSON.stringify(error.response?.data || error.message));
+        }
+        throw error;
+    }
+}

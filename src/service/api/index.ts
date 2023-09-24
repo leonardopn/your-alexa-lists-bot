@@ -2,7 +2,7 @@ import Fastify from "fastify";
 import fs from "fs";
 import path from "path";
 import { z } from "zod";
-import { getAmazonAccessToken } from "../Alexa";
+import { enableToUseSkill, getAmazonAccessToken } from "../Alexa";
 
 const fastify = Fastify({
     logger: false,
@@ -23,6 +23,8 @@ fastify.get("/oauth", async function handler(request, reply) {
     const query = routeQuerySchema.parse(request.query);
 
     const token = await getAmazonAccessToken(query.code);
+    console.log(token.access_token);
+    // const result = await enableToUseSkill(token.access_token, query.code);
 
     return token;
 });
