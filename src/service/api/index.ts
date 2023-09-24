@@ -1,20 +1,30 @@
 import Fastify from "fastify";
 import fs from "fs";
 import path from "path";
+import { z } from "zod";
+import { getAmazonAccessToken } from "../Alexa";
 
 const fastify = Fastify({
-    logger: true,
+    logger: false,
     http2: true,
     https: {
-        allowHTTP1: true, // fallback support for HTTP1
+        allowHTTP1: true,
         key: fs.readFileSync(path.join(__dirname, "https", "fastify.key")),
         cert: fs.readFileSync(path.join(__dirname, "https", "fastify.cert")),
     },
 });
 
 fastify.get("/oauth", async function handler(request, reply) {
-    console.log(request);
-    return { hello: "world" };
+    const routeQuerySchema = z.object({
+        code: z.string(),
+        scope: z.string(),
+    });
+
+    const query = routeQuerySchema.parse(request.query);
+
+    const token = await getAmazonAccessToken(query.code);
+
+    return token;
 });
 
 export async function startApiServer() {
